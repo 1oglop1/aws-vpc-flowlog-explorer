@@ -1,0 +1,4 @@
+data/
+logs.txt
+*.log
+.envrc.local
