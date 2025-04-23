@@ -1,0 +1,9 @@
+http.host: "0.0.0.0"
+path.config: /usr/share/logstash/pipeline
+
+# Add to your config/logstash/config/logstash.yml
+pipeline.workers: 10                # Default is number of CPU cores
+pipeline.batch.size: 5000          # Default is 125
+pipeline.batch.delay: 50           # Default is 50ms
+queue.type: persisted
+queue.max_bytes: 4gb

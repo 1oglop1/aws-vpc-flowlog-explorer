@@ -1,0 +1,34 @@
+# Basic cluster settings
+cluster.name: vpc-logs-cluster
+node.name: single-node
+
+# Network settings
+network.host: 0.0.0.0
+
+# Discovery settings
+discovery.type: single-node
+
+# Path settings
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# Security settings
+xpack.security.enabled: false
+
+# Memory settings
+bootstrap.memory_lock: false
+# bootstrap.memory_lock: true  # can speedup indexing but does swap
+
+# Add to your config/elasticsearch/elasticsearch.yml
+indices.memory.index_buffer_size: 30%
+indices.fielddata.cache.size: 25%
+thread_pool.write.queue_size: 2000
+
+# Additional settings for high-volume indexing
+# indices.recovery.max_bytes_per_sec: 50mb
+# # Throttle merges to prevent I/O overload
+# indices.merge.scheduler.max_thread_count: 1
+# # Reduce refresh frequency to improve indexing throughput
+# index.refresh_interval: 30s
+# # Increase queue sizes
+# thread_pool.bulk.queue_size: 1000
