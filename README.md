@@ -13,6 +13,7 @@ Run these commands to start the solution
 `./download_vpc_logs.sh s3://bucket-name/THE_REST_OF_S3_URI` - it can be a single file or a whole directory
 
 `docker-compose up -d` - starts the whole machinery 
+`./update-template.sh` - update index template 
 
 `./monitor.sh` - simple indicator if everything works as expected
 

@@ -125,15 +125,22 @@ echo "If document counts are increasing, Fluent Bit is successfully processing l
 docker-compose logs fluent-bit > fb.log
 
 
-# curl -X GET "localhost:9200/_cat/indices/vpc-flow-logs-*?v"
-curl -X GET "localhost:9200/_cat/indices/vpc-flow-logs*?v"
-echo
-curl -X GET "localhost:9200/vpc-flow-logs*/_search?size=1"
-echo
-# Check available fields
-curl -X GET "localhost:9200/vpc-flow-logs*/_mapping/field/*"
-echo
-# Check for specific field existence (e.g., srcaddr, dstaddr)
-curl -X GET "localhost:9200/vpc-flow-logs*/_search?q=srcaddr:*&size=1"
-echo
-curl -X GET "localhost:9200/vpc-flow-logs*/_count"
+# # curl -X GET "localhost:9200/_cat/indices/vpc-flow-logs-*?v"
+# curl -X GET "localhost:9200/_cat/indices/vpc-flow-logs*?v"
+# echo
+# curl -X GET "localhost:9200/vpc-flow-logs*/_search?size=1"
+# echo
+# # Check available fields
+# curl -X GET "localhost:9200/vpc-flow-logs*/_mapping/field/*"
+# echo
+# # Check for specific field existence (e.g., srcaddr, dstaddr)
+# curl -X GET "localhost:9200/vpc-flow-logs*/_search?q=srcaddr:*&size=1"
+# echo
+
+while true; do
+  clear
+  # curl -s "localhost:9200/_cat/indices/vpc-flow-logs-*?v&h=index,docs.count,store.size"
+  # echo
+  curl -s "localhost:9200/_cat/indices/vpc-flow-logs-*?v&h=index,docs.count,store.size" | tee /dev/tty | awk 'NR>1 {docs+=$2; size+=$3} END {printf "\nTotals:\t%d\t%.2f MB\n", docs, size}'
+  sleep 5
+done

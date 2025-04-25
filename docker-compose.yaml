@@ -53,6 +53,7 @@ services:
       - ./config/fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf:ro
       - ./config/fluent-bit/decompress.lua:/fluent-bit/etc/decompress.lua:ro
       - ./config/fluent-bit/extract_path_metadata.lua:/fluent-bit/etc/extract_path_metadata.lua:ro
+      - ./config/fluent-bit/delay.lua:/fluent-bit/etc/delay.lua:ro
       - ./data/logs:/logs:ro
       - ./data/fluent-bit/tmp:/tmp
     depends_on:
@@ -66,18 +67,18 @@ services:
       - TZ=UTC
     command: ["/fluent-bit/bin/fluent-bit", "-c", "/fluent-bit/etc/fluent-bit.conf"]
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.12.2
-    ports:
-      - "5601:5601"
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    volumes:
-      - ./config/kibana:/usr/share/kibana/config
-      - ./data/kibana:/usr/share/kibana/data
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:8.12.2
+  #   ports:
+  #     - "5601:5601"
+  #   environment:
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #   volumes:
+  #     - ./config/kibana:/usr/share/kibana/config
+  #     - ./data/kibana:/usr/share/kibana/data
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
 
 volumes:
   es_data:
